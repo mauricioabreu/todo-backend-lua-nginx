@@ -1,0 +1,17 @@
+services:
+  api:
+    build: .
+    ports:
+      - "8080:80"
+    volumes:
+      - ./api:/todoapp/api
+      - ./nginx.conf:/usr/local/openresty/nginx/conf/nginx.conf
+  test:
+    build: tests
+    volumes:
+       - ./tests:/tests
+    depends_on:
+      - api
+    links:
+      - api
+    command: pytest /tests/tests.py
