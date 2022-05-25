@@ -3,3 +3,6 @@ run:
 
 test:
 	@docker-compose up test
+
+formatpy:
+	@black

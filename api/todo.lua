@@ -26,6 +26,15 @@ todolist.list = function(items)
   return json.encode(list)
 end
 
+todolist.update = function(uid, prev_data, new_data, items)
+  local data = prev_data
+  for k, _ in pairs(new_data) do
+    data[k] = new_data[k]
+  end
+  items:replace(uid, json.encode(data))
+  return json.encode(data)
+end
+
 todolist.flush = function(items)
   items:flush_all()
 end
