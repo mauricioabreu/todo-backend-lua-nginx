@@ -34,7 +34,7 @@ todolist.list = function(items)
   local list = {}
   local ids = items:get_keys()
   for _, id in ipairs(ids) do
-    table.insert(list, items:get(id))
+    table.insert(list, json.decode(items:get(id)))
   end
   return json.encode(list)
 end
