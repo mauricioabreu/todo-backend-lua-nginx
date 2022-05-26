@@ -13,7 +13,7 @@ end
 
 todolist.create = function(data, items)
   local id = uuid()
-  local item = {title = data.title, id = id, completed = false}
+  local item = {title = data.title, id = id, completed = false, order = data.order}
   items:set(id, json.encode(item))
   return json.encode(repr(item))
 end
