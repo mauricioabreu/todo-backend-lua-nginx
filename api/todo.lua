@@ -1,5 +1,5 @@
 local uuid = require("uuid")
-local json = require("cjson")
+local json = require("rxi-json-lua")
 local todolist = {}
 
 local function url_for(id)
