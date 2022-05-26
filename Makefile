@@ -4,5 +4,8 @@ run:
 test:
 	@docker-compose up test
 
-formatpy:
+format-py:
 	@black
+
+reload-nginx:
+	@docker kill --signal=SIGHUP nginx-lua-api
