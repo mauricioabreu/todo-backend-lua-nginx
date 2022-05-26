@@ -4,6 +4,8 @@ services:
     build: .
     ports:
       - "8080:80"
+    environment:
+      - SITE_URL=http://localhost:8080
     volumes:
       - ./api:/todoapp/api
       - ./nginx.conf:/usr/local/openresty/nginx/conf/nginx.conf

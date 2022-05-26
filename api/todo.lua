@@ -2,37 +2,50 @@ local uuid = require("uuid")
 local json = require("cjson")
 local todolist = {}
 
+local function url_for(id)
+  return ngx.var.site_url .. "/todos/" .. id
+end
+
+local function repr(todo)
+  todo.url = url_for(todo.id)
+  return json.encode(todo)
+end
+
 todolist.create = function(data, items)
-  local uid = uuid()
-  local json_data = json.encode{title = data.title, uid = uid, completed = false}
-  items:set(uid, json_data)
-  return json_data
+  local id = uuid()
+  local item = {title = data.title, id = id, completed = false}
+  items:set(id, json.encode(item))
+  return repr(item)
 end
 
-todolist.delete = function(uid, items)
-  items:delete(uid)
+todolist.delete = function(id, items)
+  items:delete(id)
 end
 
-todolist.get = function(uid, items)
-  return items:get(uid)
+todolist.get = function(id, items)
+  local item = items:get(id)
+  if item ~= nil then
+    return repr(json.decode(items:get(id)))
+  end
+  return nil
 end
 
 todolist.list = function(items)
   local list = {}
-  local uids = items:get_keys()
-  for _, uid in ipairs(uids) do
-    table.insert(list, json.decode(items:get(uid)))
+  local ids = items:get_keys()
+  for _, id in ipairs(ids) do
+    table.insert(list, items:get(id))
   end
   return json.encode(list)
 end
 
-todolist.update = function(uid, prev_data, new_data, items)
+todolist.update = function(id, prev_data, new_data, items)
   local data = prev_data
   for k, _ in pairs(new_data) do
     data[k] = new_data[k]
   end
-  items:replace(uid, json.encode(data))
-  return json.encode(data)
+  items:replace(id, data)
+  return repr(data)
 end
 
 todolist.flush = function(items)

@@ -18,7 +18,7 @@ def test_delete_todo():
     assert response.status_code == 200
     data = response.json()
 
-    response = requests.delete(f"http://api:80/todos/{data['uid']}")
+    response = requests.delete(f"http://api:80/todos/{data['id']}")
     assert response.status_code == 204
 
 
@@ -29,7 +29,7 @@ def test_get_todo():
     assert response.status_code == 200
     data = response.json()
 
-    response = requests.get(f"http://api:80/todos/{data['uid']}")
+    response = requests.get(f"http://api:80/todos/{data['id']}")
     assert response.status_code == 200
     data = response.json()
     assert data["title"] == "buy some groceries"
@@ -63,7 +63,7 @@ def test_update_todo():
     data = response.json()
 
     response = requests.patch(
-        f"http://api:80/todos/{data['uid']}",
+        f"http://api:80/todos/{data['id']}",
         json={"title": "do homework", "completed": True},
     )
     assert response.status_code == 200
