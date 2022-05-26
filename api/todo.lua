@@ -8,14 +8,14 @@ end
 
 local function repr(todo)
   todo.url = url_for(todo.id)
-  return json.encode(todo)
+  return todo
 end
 
 todolist.create = function(data, items)
   local id = uuid()
   local item = {title = data.title, id = id, completed = false}
   items:set(id, json.encode(item))
-  return repr(item)
+  return json.encode(repr(item))
 end
 
 todolist.delete = function(id, items)
@@ -25,7 +25,7 @@ end
 todolist.get = function(id, items)
   local item = items:get(id)
   if item ~= nil then
-    return repr(json.decode(items:get(id)))
+    return json.encode(repr(json.decode(items:get(id))))
   end
   return nil
 end
@@ -34,7 +34,7 @@ todolist.list = function(items)
   local list = {}
   local ids = items:get_keys()
   for _, id in ipairs(ids) do
-    table.insert(list, json.decode(items:get(id)))
+    table.insert(list, repr(json.decode(items:get(id))))
   end
   return json.encode(list)
 end
@@ -45,7 +45,7 @@ todolist.update = function(id, prev_data, new_data, items)
     data[k] = new_data[k]
   end
   items:replace(id, data)
-  return repr(data)
+  return json.encode(repr(data))
 end
 
 todolist.flush = function(items)
