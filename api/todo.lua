@@ -44,7 +44,8 @@ todolist.update = function(id, prev_data, new_data, items)
   for k, _ in pairs(new_data) do
     data[k] = new_data[k]
   end
-  items:replace(id, data)
+
+  items:replace(id, json.encode(data))
   return json.encode(repr(data))
 end
 
