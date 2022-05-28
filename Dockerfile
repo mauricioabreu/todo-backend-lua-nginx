@@ -10,4 +10,4 @@ COPY api /todoapp/api
 
 COPY nginx.conf /usr/local/openresty/nginx/conf/nginx.conf
 
-CMD sed -i -e "s/LPORT/${PORT}/g" /usr/local/openresty/nginx/conf/nginx.conf && nginx -g 'daemon off;'
+CMD sed -i -e 's/$LISTEN_PORT/'"$PORT"'/g' /usr/local/openresty/nginx/conf/nginx.conf && nginx -g 'daemon off;'
