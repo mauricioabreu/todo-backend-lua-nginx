@@ -14,13 +14,13 @@ This URL tests all the use cases for an app to be compatible with www.todobacken
 
 You can start to use the API endpoints
 
-|    Endpoint | Action      | Method |                                                     | Response                                                                      |
-|------------:|-------------|--------|-----------------------------------------------------|-------------------------------------------------------------------------------|
-| /todos      | Create todo | POST   | JSON(title: string, completed: boolean, order: int) | JSON(title: string, completed: boolean, order: int, uid: string, url: string) |
-| /todos/<id> | Read todo   | GET    | N/A                                                 | JSON(title: string, completed: boolean, order: int, uid: string, url: string) |
-| /todos/<id> | Delete todo | DELETE | N/A                                                 | JSON(title: string, completed: boolean, order: int, uid: string, url: string) |
-| /todos      | List todos  | GET    | N/A                                                 | JSON(title: string, completed: boolean, order: int, uid: string, url: string) |
-| /todos/<id> | Update todo | PATCH  | JSON(title: string, completed: boolean, order: int) | JSON(title: string, completed: boolean, order: int, uid: string, url: string) |
+| Endpoint     	| Action      	| Method 	|                                                     	| Response                                                                      	|
+|--------------	|-------------	|--------	|-----------------------------------------------------	|-------------------------------------------------------------------------------	|
+| /todos       	| Create todo 	| POST   	| JSON(title: string, completed: boolean, order: int) 	| JSON(title: string, completed: boolean, order: int, uid: string, url: string) 	|
+| /todos/\<id> 	| Read todo   	| GET    	| N/A                                                 	| JSON(title: string, completed: boolean, order: int, uid: string, url: string) 	|
+| /todos/\<id> 	| Delete todo 	| DELETE 	| N/A                                                 	| JSON(title: string, completed: boolean, order: int, uid: string, url: string) 	|
+| /todos       	| List todos  	| GET    	| N/A                                                 	| JSON(title: string, completed: boolean, order: int, uid: string, url: string) 	|
+| /todos/\<id> 	| Update todo 	| PATCH  	| JSON(title: string, completed: boolean, order: int) 	| JSON(title: string, completed: boolean, order: int, uid: string, url: string) 	|
 
 ## Tests
 
