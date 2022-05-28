@@ -7,8 +7,6 @@ services:
     environment:
       - SITE_URL=http://localhost:8080
       - PORT=8080
-    volumes:
-      - ./api:/todoapp/api
   test:
     build: tests
     volumes:
